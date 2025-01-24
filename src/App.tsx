@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
 import { useAuthenticator } from '@aws-amplify/ui-react';
-import { ThemeProvider, Button, useTheme, IconsProvider, Rating, Alert } from '@aws-amplify/ui-react';
+import { ThemeProvider, useTheme, Alert } from '@aws-amplify/ui-react';
 import Footer from './components/Footer';
 import Header from './components/Header';
 
