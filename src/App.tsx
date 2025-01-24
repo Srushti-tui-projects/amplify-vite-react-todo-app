@@ -2,11 +2,15 @@ import { useEffect, useState } from "react";
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
 import { useAuthenticator } from '@aws-amplify/ui-react';
+import { ThemeProvider, Button, useTheme, IconsProvider, Rating, Alert } from '@aws-amplify/ui-react';
+import Footer from './components/Footer';
+import Header from './components/Header';
 
 const client = generateClient<Schema>();
 
 function App() {
   // const { signOut } = useAuthenticator();
+  const { tokens } = useTheme();
   const { user, signOut } = useAuthenticator();
   const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
 
@@ -25,25 +29,44 @@ function App() {
   }
 
   return (
-    <main>
-      <h1>{user?.signInDetails?.loginId}'s todos</h1>
-      <button onClick={createTodo}>+ new</button>
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}
-          onClick={() => deleteTodo(todo.id)}
-          >{todo.content}</li>
-        ))}
-      </ul>
-      <div>
-        🥳 App successfully hosted. Try creating a new todo.
+    <ThemeProvider nonce="rAnd0m">
+      <Header />
+      <main>
+        <h1>{user?.signInDetails?.loginId}'s todos</h1>
+
+        <button onClick={createTodo}>+ new</button>
+        <ul>
+          {todos.map((todo) => (
+            <li key={todo.id}
+              onClick={() => deleteTodo(todo.id)}
+            >{todo.content}</li>
+          ))}
+        </ul>
+        <div>
+          <br />
+          <Alert
+            variation="info"
+            isDismissible={false}
+            hasIcon={true}
+            heading="Note"
+            border="1px solid black "
+            style={{
+              borderRadius: '10px', // Add radius here
+              border: '1px solid black', // Retain your custom border
+              padding: '10px', // Optional: Adjust padding if needed
+            }}
+          >
+            Double click to delete the item.
+          </Alert>
+
+          <br />
+        </div>
         <br />
-        <a href="https://docs.amplify.aws/react/start/quickstart/#make-frontend-updates">
-          Review next step of this tutorial.
-        </a>
-      </div>
-      <button onClick={signOut}>Sign out</button>
-    </main>
+        <button onClick={signOut}>Sign out</button>
+        <Footer />
+      </main>
+
+    </ThemeProvider>
   );
 }
 
