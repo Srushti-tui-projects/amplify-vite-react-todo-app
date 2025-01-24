@@ -1,4 +1,4 @@
-import { View, Image, useTheme, Text } from '@aws-amplify/ui-react';
+import { View, Image, useTheme } from '@aws-amplify/ui-react';
 
 function Header() {
   const { tokens } = useTheme();
@@ -8,9 +8,6 @@ function Header() {
       <Image
         alt="Amplify logo"
         src="https://docs.amplify.aws/assets/logo-dark.svg"
-        // src="TUI_Logo.png"
-        // height="10%"
-        // width="10%"
       />
     </View>
   );

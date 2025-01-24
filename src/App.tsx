@@ -2,15 +2,13 @@ import { useEffect, useState } from "react";
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
 import { useAuthenticator } from '@aws-amplify/ui-react';
-import { ThemeProvider, useTheme, Alert } from '@aws-amplify/ui-react';
+import { ThemeProvider, Alert } from '@aws-amplify/ui-react';
 import Footer from './components/Footer';
 import Header from './components/Header';
 
 const client = generateClient<Schema>();
 
 function App() {
-  // const { signOut } = useAuthenticator();
-  const { tokens } = useTheme();
   const { user, signOut } = useAuthenticator();
   const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
 
